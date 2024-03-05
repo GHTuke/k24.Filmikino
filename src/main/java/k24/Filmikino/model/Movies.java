@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 /*
  * Basic class for containing info on different movies
@@ -22,18 +24,31 @@ public class Movies {
 	private String directorLname;
 	private String movieDescription;
 
+	@ManyToOne
+	@JoinColumn(name = "genreId")
+	private Genres genre;
+
 	public Movies() {
 		super();
 	}
 
 	public Movies(String movieName, int publicationYear, String directorFname, String directorLname,
-			String movieDescription) {
+			String movieDescription, Genres genre) {
 		super();
 		this.movieName = movieName;
 		this.publicationYear = publicationYear;
 		this.directorFname = directorFname;
 		this.directorLname = directorLname;
 		this.movieDescription = movieDescription;
+		this.genre = genre;
+	}
+
+	public Genres getGenre() {
+		return genre;
+	}
+
+	public void setGenre(Genres genre) {
+		this.genre = genre;
 	}
 
 	public Long getId() {
@@ -70,6 +85,10 @@ public class Movies {
 
 	public String getDirectorLname() {
 		return directorLname;
+	}
+	
+	public String getDirectorShorthandname() {
+		return directorFname.charAt(0) + ", " + directorLname;
 	}
 
 	public void setDirectorLname(String directorLname) {

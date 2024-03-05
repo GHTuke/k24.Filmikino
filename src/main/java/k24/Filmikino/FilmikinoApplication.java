@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import k24.Filmikino.model.Genres;
+import k24.Filmikino.model.GenresRepository;
 import k24.Filmikino.model.Movies;
 import k24.Filmikino.model.MoviesRepository;
 import k24.Filmikino.model.Screens;
@@ -20,9 +22,10 @@ public class FilmikinoApplication {
 	
 	/*
 	 * Adding some test data for the system to show
+	 * Don't mind the movies, just needed something to take my mind off every now and then
 	 */
 	@Bean
-	public CommandLineRunner filmikinoTester (MoviesRepository moviesrepository, ScreensRepository screensrepository) {
+	public CommandLineRunner filmikinoTester (MoviesRepository moviesrepository, ScreensRepository screensrepository, GenresRepository genresrepository) {
 		return (args) -> {
 			
 			Screens screen1 = new Screens("Lounge", 30);
@@ -33,10 +36,36 @@ public class FilmikinoApplication {
 			screensrepository.save(screen2);
 			screensrepository.save(screen3);
 			
-			Movies movie1 = new Movies("The Great Gretzky", 2013, "Steve", "Holt", "Placeholder description");
-			Movies movie2 = new Movies("Jaws of the Jungle", 2023, "Christopher", "Turkleton", "Placeholder description");
-			Movies movie3 = new Movies("Jurassic Bark", 3001, "Phillip", "Fry", "Placeholder description");
-			Movies movie4 = new Movies("Laura of Arabia", 1984, "Kaj", "Franck", "Placeholder description");
+			Genres genre1 = new Genres("Romance");
+			Genres genre2 = new Genres("Drama");
+			Genres genre3 = new Genres("Action");
+			Genres genre4 = new Genres("Comedy");
+			
+			genresrepository.save(genre1);
+			genresrepository.save(genre2);
+			genresrepository.save(genre3);
+			genresrepository.save(genre4);
+			
+			Movies movie1 = new Movies("The Great Gretzky"
+					, 2013
+					, "Steve", "Holt"
+					, "Placeholder description"
+					, genresrepository.findByGenre("Romance").get(0));
+			Movies movie2 = new Movies("Jaws of the Jungle"
+					, 2023
+					, "Christopher", "Turkleton"
+					, "Placeholder description"
+					, genresrepository.findByGenre("Action").get(0));
+			Movies movie3 = new Movies("Jurassic Bark"
+					, 3001
+					, "Phillip", "Fry"
+					, "Placeholder description"
+					, genresrepository.findByGenre("Drama").get(0));
+			Movies movie4 = new Movies("Laura of Arabia"
+					, 1939
+					, "George", "Constanza"
+					, "Placeholder"
+					, genresrepository.findByGenre("Comedy").get(0));
 			
 			moviesrepository.save(movie1);
 			moviesrepository.save(movie2);
