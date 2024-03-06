@@ -4,9 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 /*
  * Basic class for containing info on the different theater screens
+ * Validation rules added for new screens
  */
 
 @Entity
@@ -16,7 +20,11 @@ public class Screens {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty(message = "Screen needs a name")
+	@Size(min = 1, max = 50)
 	private String screenName;
+	
+	@Positive
 	private int capacity;
 
 	public Screens() {

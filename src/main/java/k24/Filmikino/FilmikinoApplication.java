@@ -61,10 +61,10 @@ public class FilmikinoApplication {
 					, "Phillip", "Fry"
 					, "Placeholder description"
 					, genresrepository.findByGenre("Drama").get(0));
-			Movies movie4 = new Movies("Laura of Arabia"
+			Movies movie4 = new Movies("Gone with the kiln"
 					, 1939
 					, "George", "Constanza"
-					, "Placeholder"
+					, "Witness the exciting story of how the famous ceramics of Arabia came to be. Experience first hand as Kaj Franck(Spede Pasanen) tutors a young new designer Laura(Marjatta Raita). See the origins of the famous quote 'Franckly, my dear, I don't give a damn'. Set in the backdrop of war torn Finland after the Finnish Civil War."
 					, genresrepository.findByGenre("Comedy").get(0));
 			
 			moviesrepository.save(movie1);

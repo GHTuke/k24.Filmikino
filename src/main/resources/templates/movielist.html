@@ -1,29 +1,31 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Booklist</title>
+    <title>Movielist</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Movielist</h1>
+	<h1>Movies</h1>
 		
 	<table>
 		<tr>
 			<th>Name</th>
-			<th>Publication year</th>
+			<th>Release year</th>
 			<th>Director</th>
 			<th>Description</th>
 			<th>Genre</th>
 		</tr>
 		<tr th:each = "movies : ${movies}">
 			<td th:text = "${movies.movieName}"></td>
-			<td th:text = "${movies.publicationYear}"></td>
+			<td th:text = "${movies.releaseYear}"></td>
 			<td th:text = "${movies.directorShorthandname}"></td>
 			<td th:text = "${movies.movieDescription}"></td>
-			<td th:text = "${movies.genre.genre}"></td>
-
+			<td :text = "${movies.genre.genre}"></td>
 		</tr>
 	</table>
+	<div>
+	<p><a th:href="@{/addmovie}">Add new movie</a></p>
+	</div>
       	
 </body>
 </html>
