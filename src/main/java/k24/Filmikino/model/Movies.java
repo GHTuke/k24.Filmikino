@@ -28,7 +28,7 @@ public class Movies {
 	@Size(min=2, max=100, message = "Movie name has to be between 2 and 100 characters")
 	private String movieName;
 
-	@Positive
+	@Positive(message = "Year has to be positive number")
 	private int releaseYear;
 	
 	@NotEmpty(message = "Director needs a first name")

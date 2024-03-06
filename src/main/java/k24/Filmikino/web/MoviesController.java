@@ -7,6 +7,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import jakarta.validation.Valid;
 import k24.Filmikino.model.GenresRepository;
@@ -41,16 +43,15 @@ public class MoviesController {
 		return "addmovie";
 	}
 	
-	@PostMapping("savemovie")
+	@RequestMapping(value="savemovie", method=RequestMethod.POST)
 	public String saveMovie(@Valid @ModelAttribute("movie") Movies movie, BindingResult bindingResult, Model model) {
 		
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("movie", new Movies());
 			model.addAttribute("genre", genrerepo.findAll());
 			return "addmovie";
 		}
 		moviesrepo.save(movie);
-		return "addmovie";
+		return "redirect:movielist";
 	}
 
 }
