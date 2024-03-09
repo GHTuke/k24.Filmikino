@@ -1,5 +1,7 @@
 package k24.Filmikino;
 
+import java.time.LocalDateTime;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +13,8 @@ import k24.Filmikino.model.Movies;
 import k24.Filmikino.model.MoviesRepository;
 import k24.Filmikino.model.Screens;
 import k24.Filmikino.model.ScreensRepository;
+import k24.Filmikino.model.Showings;
+import k24.Filmikino.model.ShowingsRepository;
 
 @SpringBootApplication
 public class FilmikinoApplication {
@@ -25,9 +29,13 @@ public class FilmikinoApplication {
 	 * Don't mind the movies, just needed something to take my mind off every now and then
 	 */
 	@Bean
-	public CommandLineRunner filmikinoTester (MoviesRepository moviesrepository, ScreensRepository screensrepository, GenresRepository genresrepository) {
+	public CommandLineRunner filmikinoTester (MoviesRepository moviesrepository
+			, ScreensRepository screensrepository
+			, GenresRepository genresrepository
+			, ShowingsRepository showingsrepository) {
 		return (args) -> {
 			
+			//Adding some screens and saving them in repository for testing
 			Screens screen1 = new Screens("Lounge", 30);
 			Screens screen2 = new Screens("VIP", 50);
 			Screens screen3 = new Screens("Cattle", 300);
@@ -36,6 +44,7 @@ public class FilmikinoApplication {
 			screensrepository.save(screen2);
 			screensrepository.save(screen3);
 			
+			//Adding some genres and saving them in repository for testing
 			Genres genre1 = new Genres("Romance");
 			Genres genre2 = new Genres("Drama");
 			Genres genre3 = new Genres("Action");
@@ -46,6 +55,7 @@ public class FilmikinoApplication {
 			genresrepository.save(genre3);
 			genresrepository.save(genre4);
 			
+			//Adding some movies and saving them in repository for testing
 			Movies movie1 = new Movies("The Great Gretzky"
 					, 2013
 					, "Steve", "Holt"
@@ -54,7 +64,7 @@ public class FilmikinoApplication {
 			Movies movie2 = new Movies("Jaws of the Jungle"
 					, 2023
 					, "Christopher", "Turkleton"
-					, "Placeholder description"
+					, "Following his Oscar worthy perfomance in the 'Whale', actor Brendan Frasier returns to reprise his most famous role as George of the Jungle, in this action filled sequel that combines the tense horror of Jaws with the comedy of George of the Jungle."
 					, genresrepository.findByGenre("Action").get(0));
 			Movies movie3 = new Movies("Jurassic Bark"
 					, 3001
@@ -71,6 +81,16 @@ public class FilmikinoApplication {
 			moviesrepository.save(movie2);
 			moviesrepository.save(movie3);
 			moviesrepository.save(movie4);
+			
+			//Adding some showings and saving them in repository for testing
+			Showings showing1 = new Showings(movie1, screen1, LocalDateTime.of(2024, 4, 21, 14, 00));
+			Showings showing2 = new Showings(movie2, screen2, LocalDateTime.of(2024, 5, 2, 18, 15));
+			Showings showing3 = new Showings(movie3, screen3, LocalDateTime.of(2024, 6, 3, 10, 10));
+			
+			showingsrepository.save(showing1);
+			showingsrepository.save(showing2);
+			showingsrepository.save(showing3);
+			
 		};
 	}
 

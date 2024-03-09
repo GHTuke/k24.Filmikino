@@ -1,5 +1,10 @@
 package k24.Filmikino.model;
 
+
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -22,6 +28,7 @@ public class Movies {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "movie_id")
 	private Long id;
 
 	@NotEmpty(message = "Movie name cannot be empty")
@@ -47,6 +54,10 @@ public class Movies {
 	@ManyToOne
 	@JoinColumn(name = "genreId")
 	private Genres genre;
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy ="movie")
+	private List<Showings> showings;
+	
 
 	public Movies() {
 		super();

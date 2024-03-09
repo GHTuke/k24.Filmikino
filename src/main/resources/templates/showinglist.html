@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Showing</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Showing</h1>
+		
+	<table>
+		<tr>
+			<th>Movie</th>
+			<th>Screen</th>
+			<th>Time</th>
+			<th>Date</th>
+		</tr>
+		<tr th:each = "showings : ${showings}">
+			<td th:text = "${showings.movie.movieName}"></td>
+			<td th:text = "${showings.screen.screenName}"></td>
+			<td th:text = "${showings.getHour} + ':' + ${showings.getMinute}"></td>
+			<td th:text = "${showings.showingtime.dayOfMonth}+ '.' + ${showings.showingtime.monthValue} + '.' + ${showings.showingtime.year}"></td>
+		</tr>
+	</table>
+
+</html>

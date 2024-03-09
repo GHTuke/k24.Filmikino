@@ -1,9 +1,14 @@
 package k24.Filmikino.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -18,6 +23,7 @@ public class Screens {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "screen_id")
 	private Long id;
 
 	@NotEmpty(message = "Screen needs a name")
@@ -26,6 +32,9 @@ public class Screens {
 	
 	@Positive
 	private int capacity;
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy ="screen")
+	private List<Showings> showings;
 
 	public Screens() {
 		super();
