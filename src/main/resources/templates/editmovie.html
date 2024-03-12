@@ -1,44 +1,22 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Movielist</title>
+    <title>Edit movie</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Movies</h1>
-		
+	
 	<div>
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign out">
 		</form>
 	</div>
 	
-	<table>
-		<tr>
-			<th>Name</th>
-			<th>Release year</th>
-			<th>Director</th>
-			<th>Genre</th>
-			<th>Description</th>
-		</tr>
-		<tr th:each = "movies : ${movies}">
-			<td th:text = "${movies.movieName}"></td>
-			<td th:text = "${movies.releaseYear}"></td>
-			<td th:text = "${movies.directorShorthandname}"></td>
-			<td th:text = "${movies.genre.genre}"></td>
-			<td th:text = "${movies.movieDescription}"></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><p><a th:href="@{/editmovie/{id}(id=${movies.id})}">Edit movie</a></p></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><p><a th:href="@{/deletemovie/{id}(id=${movies.id})}">Delete movie</a></p></td>
-		</tr>
-	</table>
-	<div style="clear: both; display: block; height: 10px;"></div>
-	<a href="/showinglist">Movie's playing</a>
-	</div>
+	<h1>Edit movie</h1>
 	
 		<div>
-			
-			<form action="#" th:object="${movie}" th:action="@{savemovie}" method="post" sec:authorize="hasAuthority('ADMIN')">
-				<h2>Add a new movie</h2>
+			<form action="#" th:object="${movie}" th:action="@{../saveEditedmovie}" method="post">
+				<input type="hidden" id="id" th:field="*{id}" />
 				<div>
 					<label>Name</label>
 					<input type="text" th:field="*{movieName}" />
@@ -52,13 +30,13 @@
 					<div style="clear: both; display: block; height: 10px;"></div>
 				</div>
 				<div>
-					<label>Director's' first name</lable>
+					<label>Director's first name</label>
 					<input type="text" th:field="*{directorFname}" />
 					<div th:if="${#fields.hasErrors('directorFname')}" th:each="err : ${#fields.errors('directorFname')}" th:text="${err}" style="color: red;"></div>
 					<div style="clear: both; display: block; height: 10px;"></div>
 				</div>
 				<div>
-					<label>Director's' last name</lable>
+					<label>Director's last name</lable>
 					<input type="text" th:field="*{directorLname}" />
 					<div th:if="${#fields.hasErrors('directorLname')}" th:each="err : ${#fields.errors('directorLname')}" th:text="${err}" style="color: red;"></div>
 					<div style="clear: both; display: block; height: 10px;"></div>
@@ -79,7 +57,6 @@
 				</div>
 			</form>
 		</div>
-
       	
 </body>
 </html>

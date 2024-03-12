@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import k24.Filmikino.model.AppUser;
+import k24.Filmikino.model.AppUserRepository;
 import k24.Filmikino.model.Genres;
 import k24.Filmikino.model.GenresRepository;
 import k24.Filmikino.model.Movies;
@@ -32,7 +34,8 @@ public class FilmikinoApplication {
 	public CommandLineRunner filmikinoTester (MoviesRepository moviesrepository
 			, ScreensRepository screensrepository
 			, GenresRepository genresrepository
-			, ShowingsRepository showingsrepository) {
+			, ShowingsRepository showingsrepository
+			, AppUserRepository appuserrepository) {
 		return (args) -> {
 			
 			//Adding some screens and saving them in repository for testing
@@ -90,6 +93,14 @@ public class FilmikinoApplication {
 			showingsrepository.save(showing1);
 			showingsrepository.save(showing2);
 			showingsrepository.save(showing3);
+			
+			//Adding users: user and admin
+			
+			AppUser user = new AppUser("user", "$2a$10$0I3D.dWMqG/08uwoXjKsx.yNG447U3tk/szToL8FtWSxKVfTqJGBm", "USER");
+			AppUser admin = new AppUser("admin", "$2a$10$WmiW5apNDwm9k03E/mRkxeJ1scRyqNHhEIbhnOtV88Du5NDfw3tqO", "ADMIN");
+			
+			appuserrepository.save(user);
+			appuserrepository.save(admin);
 			
 		};
 	}

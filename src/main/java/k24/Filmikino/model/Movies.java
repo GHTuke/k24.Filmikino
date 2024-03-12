@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
@@ -32,22 +31,22 @@ public class Movies {
 	private Long id;
 
 	@NotEmpty(message = "Movie name cannot be empty")
-	@Size(min=2, max=100, message = "Movie name has to be between 2 and 100 characters")
+	@Size(max=100, message = "Movie name cannot exceed 100 characters")
 	private String movieName;
 
 	@Positive(message = "Year has to be positive number")
 	private int releaseYear;
 	
 	@NotEmpty(message = "Director needs a first name")
-	@Size(min = 2, max = 30, message = "Name has to be between 2 and 30 characters long")
+	@Size(max = 30, message = "First name cannot exceed 30 characters")
 	private String directorFname;
 	
 	@NotEmpty(message = "Director needs a last name")
-	@Size(min = 2, max = 30, message = "Name has to be between 2 and 30 characters long")
+	@Size(max = 30, message = "Last name cannot exceed 30 characters")
 	private String directorLname;
 	
-	@Size(min = 1, max = 500, message = "Description has to be between 2 and 500 characters")
-	@Lob //Added annotation to get past 255char limit
+	@Column(columnDefinition = "TEXT") //Allows for more than 255 characters
+	@Size(min = 1, max = 500, message = "Description has to be between 1 and 500 characters")
 	private String movieDescription;
 
 	@NotNull
@@ -118,6 +117,7 @@ public class Movies {
 		return directorLname;
 	}
 	
+	//Extra getter for name combination in the format of "J, Doe"
 	public String getDirectorShorthandname() {
 		if (directorFname == null) {
 		return directorLname; }

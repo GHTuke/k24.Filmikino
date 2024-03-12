@@ -24,7 +24,7 @@ public class Genres {
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
-	private List<Genres> genres;
+	private List<Movies> movie;
 
 	private String genre;
 

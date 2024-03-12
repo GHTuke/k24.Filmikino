@@ -7,6 +7,12 @@
 <body>
 	<h1>Showing</h1>
 		
+	<div>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign out">
+		</form>
+	</div>
+	
 	<table>
 		<tr>
 			<th>Movie</th>
@@ -21,5 +27,37 @@
 			<td th:text = "${showings.showingtime.dayOfMonth}+ '.' + ${showings.showingtime.monthValue} + '.' + ${showings.showingtime.year}"></td>
 		</tr>
 	</table>
+	
+	<div style="clear: both; display: block; height: 10px;"></div>
+	<a href="/movielist">Movies</a>
+	
+	<div>
+			
+			<form action="#" th:object="${showing}" th:action="@{saveshowing}" method="post" sec:authorize="hasAuthority('ADMIN')">
+				<h2>Add a new movie showing</h2>
+				
+				<div>
+					<select id="movies" th:field="*{movie}">
+						<option th:each="m: ${movies}" th:value="${m}" th:text="${m.movieName}"></option>
+					</select>
+					<div style="clear: both; display: block; height: 10px;"></div>
+				</div>
+				<div>
+					<select id="screens" th:field="*{screen}">
+						<option th:each="s: ${screens}" th:value="${s}" th:text="${s.screenName}"></option>
+					</select>
+					<div style="clear: both; display: block; height: 10px;"></div>
+				</div>
+				<div>
+					<label>Showing date and time</label>
+					<p></p>
+					<input type="datetime-local" th:field="*{showingtime}" />
+					<div th:if="${#fields.hasErrors('showingtime')}" th:each="err : ${#fields.errors('showingtime')}" th:text="${err}" style="color: red;"></div>
+					<div style="clear: both; display: block; height: 10px;"></div>
+				</div>
+				<input type="submit" value="Save"/>
+				
+			</form>
+		</div>
 
 </html>
