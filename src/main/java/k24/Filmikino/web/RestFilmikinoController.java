@@ -3,6 +3,8 @@ package k24.Filmikino.web;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,15 +45,24 @@ public class RestFilmikinoController {
 		return movierepo.findById(movieId);
 	}
 	
-	@PostMapping("movie")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@PostMapping("movies")
 	Movies newMovie(@RequestBody Movies newMovie) {
 		return movierepo.save(newMovie);
 	}
 	
-	@PutMapping("car/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@PutMapping("movie/{id}")
 	Movies editMovie(@RequestBody Movies editMovie, @PathVariable("id") Long id) {
 		editMovie.setId(id);
 		return movierepo.save(editMovie);
+	}
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@DeleteMapping("movie/{id}")
+	public Iterable<Movies> deleteMovie(@PathVariable("id") Long id) {
+		movierepo.deleteById(id);
+		return movierepo.findAll();
 	}
 	
 	//Showings REST actions
@@ -76,6 +87,26 @@ public class RestFilmikinoController {
 	@GetMapping("screen/{id}")
 	public Optional<Screens> getScreenById(@PathVariable("id") Long showingId) {
 		return screenrepo.findById(showingId);
+	}
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@PostMapping("screens")
+	Screens newScreen(@RequestBody Screens newScreen) {
+		return screenrepo.save(newScreen);
+	}
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@PutMapping("screen/{id}")
+	Screens editScreen(@RequestBody Screens editScreen, @PathVariable("id") Long id) {
+		editScreen.setId(id);
+		return screenrepo.save(editScreen);
+	}
+	
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@DeleteMapping("screen/{id}")
+	public Iterable<Screens> deleteScreen(@PathVariable("id") Long id) {
+		screenrepo.deleteById(id);
+		return screenrepo.findAll();
 	}
 	
 }
