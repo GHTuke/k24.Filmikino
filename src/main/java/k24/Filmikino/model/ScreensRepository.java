@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ScreensRepository extends CrudRepository<Screens, Long>{
 	
-	List<Genres> findByScreenName(String screenName);
+	List<Screens> findByScreenName(String screenName);
 
 }

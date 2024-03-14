@@ -38,7 +38,8 @@ public class Showings {
 	public Showings() {
 		super();
 	}
-/*
+/*If you use this, switch the commented setters and constructor from ShowingsKey
+ * 
 	public Showings(Movies movie, Screens screen, LocalDateTime showingtime) {
 		super();
 		this.movie = movie;

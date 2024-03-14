@@ -24,7 +24,8 @@ public class ShowingsKey implements Serializable {
 	public ShowingsKey() {
 		super();
 	}
-/*
+/*If you use this, switch the commented constructor in Showings
+ * 
 	public ShowingsKey(Long movieId, Long screenId, LocalDateTime showingtime) {
 		super();
 		this.movieId = movieId;
@@ -47,6 +48,7 @@ public class ShowingsKey implements Serializable {
 		this.movieId = movieId.getId();
 	}
 	
+	//Switch to this if you switch constructors
 	//public void setMovieId(Long movieId) {
 	//	this.movieId = movieId;
 	//}
@@ -59,6 +61,7 @@ public class ShowingsKey implements Serializable {
 		this.screenId = screenId.getId();
 	}
 	
+	//Switch to this if you switch constructors
 	//public void setScreenId(Long screenId) {
 	//	this.screenId = screenId;
 	//}

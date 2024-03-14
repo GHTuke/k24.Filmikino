@@ -33,10 +33,10 @@ public class ShowingsController {
 		
 		log.info("List different showings and add new showings as admin");
 		model.addAttribute("showings", showingsrepo.findAll());
-		
-		model.addAttribute("showing", new Showings());
 		model.addAttribute("movies", moviesrepo.findAll());
 		model.addAttribute("screens", screensrepo.findAll());
+		
+		model.addAttribute("showing", new Showings());
 		return "showinglist";
 	}
 	
@@ -50,7 +50,9 @@ public class ShowingsController {
 			model.addAttribute("screens", screensrepo.findAll());
 			return "showinglist";
 		}
+		log.info("Saving in repo");
 		showingsrepo.save(showing);
+		log.info("Saved in repo");
 		return "redirect:showinglist";
 	}
 
