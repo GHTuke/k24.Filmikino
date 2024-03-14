@@ -23,7 +23,7 @@ public class Screens {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "screen_id")
+	@Column(name = "screenid")
 	private Long id;
 
 	@NotEmpty(message = "Screen needs a name")

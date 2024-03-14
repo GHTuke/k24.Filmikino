@@ -13,10 +13,10 @@ import jakarta.persistence.Embeddable;
 @Embeddable
 public class ShowingsKey implements Serializable {
 	
-	@Column(name = "movie_id")
+	@Column(name = "movieid")
 	private Long movieId;
 	
-	@Column(name = "screen_id")
+	@Column(name = "screenid")
 	private Long screenId;
 	
 	private LocalDateTime showingtime;

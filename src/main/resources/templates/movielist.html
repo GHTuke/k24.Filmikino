@@ -13,6 +13,8 @@
 		</form>
 	</div>
 	
+	<a th:href="@{/main}">Main page</a>
+	
 	<table>
 		<tr>
 			<th>Name</th>
@@ -72,7 +74,7 @@
 				<label>Genre</label>
 				<div>
 					<select id="genres" th:field="*{genre}">
-						<option th:each="genre: ${genre}" th:value="${genre.id}" th:text="${genre.genre}"></option>
+						<option th:each="g: ${genre}" th:value="${g.id}" th:text="${g.genre}"></option>
 					</select>
 					<div style="clear: both; display: block; height: 10px;"></div>
 					<input type="submit" value="Save"/>

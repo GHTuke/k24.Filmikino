@@ -11,7 +11,7 @@ import jakarta.persistence.MapsId;
 import jakarta.validation.constraints.Future;
 
 /*
- * Showings class to work as a linktable between movies and screens.
+ * Showings class to work as a link table between movies and screens.
  * Added Showingtime to primary key to allow multiple showings of the same movie in the same screen.
  * ShowingsKey works as embedded primary key.
  */
@@ -23,12 +23,12 @@ public class Showings {
 	
 	@ManyToOne
 	@MapsId("movieId")
-	@JoinColumn(name = "movie_id")
+	@JoinColumn(name = "movieid")
 	private Movies movie;
 	
 	@ManyToOne
 	@MapsId("screenId")
-	@JoinColumn(name = "screen_id")
+	@JoinColumn(name = "screenid")
 	private Screens screen;
 	
 	@Future(message = "New showing has to be in the future")

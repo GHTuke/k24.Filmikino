@@ -27,7 +27,7 @@ public class Movies {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "movie_id")
+	@Column(name = "movieid")
 	private Long id;
 
 	@NotEmpty(message = "Movie name cannot be empty")

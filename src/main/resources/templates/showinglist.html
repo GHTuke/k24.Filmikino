@@ -13,6 +13,8 @@
 		</form>
 	</div>
 	
+	<a th:href="@{/main}">Main page</a>
+	
 	<table>
 		<tr>
 			<th>Movie</th>
@@ -38,18 +40,18 @@
 				
 				<div>
 					<select id="movies" th:field="*{movie}">
-						<option th:each="m: ${movies}" th:value="${m}" th:text="${m.movieName}"></option>
+						<option th:each="m: ${movies}" th:value="${m.id}" th:text="${m.movieName}"></option>
 					</select>
 					<div style="clear: both; display: block; height: 10px;"></div>
 				</div>
 				<div>
 					<select id="screens" th:field="*{screen}">
-						<option th:each="s: ${screens}" th:value="${s}" th:text="${s.screenName}"></option>
+						<option th:each="s: ${screens}" th:value="${s.id}" th:text="${s.screenName}"></option>
 					</select>
 					<div style="clear: both; display: block; height: 10px;"></div>
 				</div>
 				<div>
-					<label>Showing date and time</label>
+					<label>Movie show's date and time</label>
 					<p></p>
 					<input type="datetime-local" th:field="*{showingtime}" />
 					<div th:if="${#fields.hasErrors('showingtime')}" th:each="err : ${#fields.errors('showingtime')}" th:text="${err}" style="color: red;"></div>

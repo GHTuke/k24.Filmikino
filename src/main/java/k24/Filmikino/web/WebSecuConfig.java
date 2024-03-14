@@ -28,10 +28,11 @@ public class WebSecuConfig {
 						.frameOptions(frameoptions -> frameoptions
 								.disable()))
 				.formLogin(formlogin -> formlogin
-						.defaultSuccessUrl("/movielist", true)
+						.defaultSuccessUrl("/main", true)
 						.permitAll())
 				.logout(logout -> logout
-						.permitAll());
+						.permitAll())
+				.csrf(csrf -> csrf.disable()); //only for testing purposes
 		
 		return http.build();
 		
