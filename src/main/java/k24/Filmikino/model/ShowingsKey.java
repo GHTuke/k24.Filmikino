@@ -35,18 +35,26 @@ public class ShowingsKey implements Serializable {
 	public Long getMovieId() {
 		return movieId;
 	}
-
-	public void setMovieId(Long movieId) {
-		this.movieId = movieId;
+	
+	public void setMovieId(Movies movieId) {
+		this.movieId = movieId.getId();
 	}
+	
+	//public void setMovieId(Long movieId) {
+	//	this.movieId = movieId;
+	//}
 
 	public Long getScreenId() {
 		return screenId;
 	}
-
-	public void setScreenId(Long screenId) {
-		this.screenId = screenId;
+	
+	public void setScreenId(Screens screenId) {
+		this.screenId = screenId.getId();
 	}
+	
+	//public void setScreenId(Long screenId) {
+	//	this.screenId = screenId;
+	//}
 
 	public LocalDateTime getShowingtime() {
 		return showingtime;
