@@ -1,5 +1,7 @@
 package k24.Filmikino.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import k24.Filmikino.model.ShowingsRepository;
 @Controller
 public class ShowingsController {
 	
+	private static final Logger log = LoggerFactory.getLogger(ShowingsController.class);
+	
 	@Autowired
 	private ShowingsRepository showingsrepo;
 	@Autowired
@@ -26,6 +30,8 @@ public class ShowingsController {
 	
 	@GetMapping("showinglist")
 	public String returnShowingList(Model model) {
+		
+		log.info("List different showings and add new showings as admin");
 		model.addAttribute("showings", showingsrepo.findAll());
 		
 		model.addAttribute("showing", new Showings());
@@ -36,8 +42,9 @@ public class ShowingsController {
 	
 	@PostMapping("saveshowing")
 	public String saveShowing(@Valid @ModelAttribute("showing") Showings showing, BindingResult bindingResult, Model model) {
-		
+		log.info("Save new showing and check the validation" + showing.getMovie() + showing.getScreen() + showing.getShowingtime());
 		if (bindingResult.hasErrors()) {
+			log.info("Issues with the validation" + showing);
 			model.addAttribute("showings", showingsrepo.findAll());
 			model.addAttribute("movies", moviesrepo.findAll());
 			model.addAttribute("screens", screensrepo.findAll());

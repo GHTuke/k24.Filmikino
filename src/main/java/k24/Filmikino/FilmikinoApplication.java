@@ -2,6 +2,8 @@ package k24.Filmikino;
 
 import java.time.LocalDateTime;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +22,8 @@ import k24.Filmikino.model.ShowingsRepository;
 
 @SpringBootApplication
 public class FilmikinoApplication {
+	
+	private static final Logger log = LoggerFactory.getLogger(FilmikinoApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(FilmikinoApplication.class, args);
@@ -39,26 +43,31 @@ public class FilmikinoApplication {
 		return (args) -> {
 			
 			//Adding some screens and saving them in repository for testing
+			log.info("Adding screens");
 			Screens screen1 = new Screens("Lounge", 30);
 			Screens screen2 = new Screens("VIP", 50);
 			Screens screen3 = new Screens("Cattle", 300);
 			
+			log.info("saving screens to repository");
 			screensrepository.save(screen1);
 			screensrepository.save(screen2);
 			screensrepository.save(screen3);
 			
 			//Adding some genres and saving them in repository for testing
+			log.info("Adding genres");
 			Genres genre1 = new Genres("Romance");
 			Genres genre2 = new Genres("Drama");
 			Genres genre3 = new Genres("Action");
 			Genres genre4 = new Genres("Comedy");
 			
+			log.info("saving genres to repository");
 			genresrepository.save(genre1);
 			genresrepository.save(genre2);
 			genresrepository.save(genre3);
 			genresrepository.save(genre4);
 			
 			//Adding some movies and saving them in repository for testing
+			log.info("Adding movies");
 			Movies movie1 = new Movies("The Great Gretzky"
 					, 2013
 					, "Steve", "Holt"
@@ -80,16 +89,19 @@ public class FilmikinoApplication {
 					, "Witness the exciting story of how the famous ceramics of Arabia came to be. Experience first hand as Kaj Franck(Spede Pasanen) tutors a young new designer, Laura, for Arabia(Marjatta Raita). See the origins of the famous quote 'Franckly, my dear, I don't give a damn'. Set in the backdrop of war torn Finland after the Finnish Civil War."
 					, genresrepository.findByGenre("Comedy").get(0));
 			
+			log.info("saving movies to repository");
 			moviesrepository.save(movie1);
 			moviesrepository.save(movie2);
 			moviesrepository.save(movie3);
 			moviesrepository.save(movie4);
 			
 			//Adding some showings and saving them in repository for testing
+			log.info("Adding showings");
 			Showings showing1 = new Showings(movie1, screen1, LocalDateTime.of(2024, 4, 21, 14, 00));
 			Showings showing2 = new Showings(movie2, screen2, LocalDateTime.of(2024, 5, 2, 18, 15));
 			Showings showing3 = new Showings(movie3, screen3, LocalDateTime.of(2024, 6, 3, 10, 10));
 			
+			log.info("saving showings to repository");
 			showingsrepository.save(showing1);
 			showingsrepository.save(showing2);
 			showingsrepository.save(showing3);
