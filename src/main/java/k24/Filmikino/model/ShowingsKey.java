@@ -24,11 +24,18 @@ public class ShowingsKey implements Serializable {
 	public ShowingsKey() {
 		super();
 	}
-
+/*
 	public ShowingsKey(Long movieId, Long screenId, LocalDateTime showingtime) {
 		super();
 		this.movieId = movieId;
 		this.screenId = screenId;
+		this.showingtime = showingtime;
+	}
+	*/
+	public ShowingsKey(Movies movieId, Screens screenId, LocalDateTime showingtime) {
+		super();
+		this.movieId = movieId.getId();
+		this.screenId = screenId.getId();
 		this.showingtime = showingtime;
 	}
 

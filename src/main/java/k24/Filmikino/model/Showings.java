@@ -38,13 +38,21 @@ public class Showings {
 	public Showings() {
 		super();
 	}
-
+/*
 	public Showings(Movies movie, Screens screen, LocalDateTime showingtime) {
 		super();
 		this.movie = movie;
 		this.screen = screen;
 		this.showingtime = showingtime;
 		this.id = new ShowingsKey(movie.getId(), screen.getId(), showingtime);
+	}
+	*/
+	public Showings(Movies movie, Screens screen, LocalDateTime showingtime) {
+		super();
+		this.movie = movie;
+		this.screen = screen;
+		this.showingtime = showingtime;
+		this.id = new ShowingsKey(movie, screen, showingtime);
 	}
 
 	public ShowingsKey getId() {
