@@ -50,8 +50,9 @@ public class ShowingsController {
 			model.addAttribute("screens", screensrepo.findAll());
 			return "showinglist";
 		}
+		Showings showing1 = new Showings(showing.getMovie(), showing.getScreen(), showing.getShowingtime());
 		log.info("Saving in repo");
-		showingsrepo.save(showing);
+		showingsrepo.save(showing1);
 		log.info("Saved in repo");
 		return "redirect:showinglist";
 	}

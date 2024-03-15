@@ -1,65 +1,71 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Showing</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Showing</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+
 <body>
 	<h1>Showing</h1>
-		
+
 	<div>
 		<form th:action="@{/logout}" method="post">
 			<input type="submit" value="Sign out">
 		</form>
 	</div>
-	
+
 	<a th:href="@{/main}">Main page</a>
-	
+
 	<table>
 		<tr>
 			<th>Movie</th>
 			<th>Screen</th>
-			<th>Time</th>
 			<th>Date</th>
+			<th>Time</th>
 		</tr>
-		<tr th:each = "showings : ${showings}">
-			<td th:text = "${showings.movie.movieName}"></td>
-			<td th:text = "${showings.screen.screenName}"></td>
-			<td th:text = "${showings.getHour} + ':' + ${showings.getMinute}"></td>
-			<td th:text = "${showings.showingtime.dayOfMonth}+ '.' + ${showings.showingtime.monthValue} + '.' + ${showings.showingtime.year}"></td>
+		<tr th:each="showings : ${showings}">
+			<td th:text="${showings.movie.movieName}"></td>
+			<td th:text="${showings.screen.screenName}"></td>
+			<td
+				th:text="${showings.showingtime.dayOfMonth}+ '.' + ${showings.showingtime.monthValue} + '.' + ${showings.showingtime.year}">
+			</td>
+			<td th:text="${showings.getHour} + ':' + ${showings.getMinute}"></td>
 		</tr>
 	</table>
-	
+
 	<div style="clear: both; display: block; height: 10px;"></div>
 	<a href="/movielist">Movies</a>
-	
+
 	<div>
-			
-			<form action="#" th:object="${showing}" th:action="@{saveshowing}" method="post" sec:authorize="hasAuthority('ADMIN')">
-				<h2>Add a new movie showing</h2>
-				
-				<div>
-					<select id="movies" th:field="*{movie}">
-						<option th:each="m: ${movies}" th:value="${m.id}" th:text="${m.movieName}"></option>
-					</select>
-					<div style="clear: both; display: block; height: 10px;"></div>
-				</div>
-				<div>
-					<select id="screens" th:field="*{screen}">
-						<option th:each="s: ${screens}" th:value="${s.id}" th:text="${s.screenName}"></option>
-					</select>
-					<div style="clear: both; display: block; height: 10px;"></div>
-				</div>
-				<div>
-					<label>Movie show's date and time</label>
-					<p></p>
-					<input type="datetime-local" th:field="*{showingtime}" />
-					<div th:if="${#fields.hasErrors('showingtime')}" th:each="err : ${#fields.errors('showingtime')}" th:text="${err}" style="color: red;"></div>
-					<div style="clear: both; display: block; height: 10px;"></div>
-				</div>
-				<input type="submit" value="Save"/>
-				
-			</form>
-		</div>
+
+		<form action="#" th:object="${showing}" th:action="@{saveshowing}" method="post"
+			sec:authorize="hasAuthority('ADMIN')">
+			<h2>Add a new movie showing</h2>
+
+			<div>
+				<select id="movies" th:field="*{movie}">
+					<option th:each="m: ${movies}" th:value="${m.id}" th:text="${m.movieName}"></option>
+				</select>
+				<div style="clear: both; display: block; height: 10px;"></div>
+			</div>
+			<div>
+				<select id="screens" th:field="*{screen}">
+					<option th:each="s: ${screens}" th:value="${s.id}" th:text="${s.screenName}"></option>
+				</select>
+				<div style="clear: both; display: block; height: 10px;"></div>
+			</div>
+			<div>
+				<label>Movie show's date and time</label>
+				<p></p>
+				<input type="datetime-local" th:field="*{showingtime}" />
+				<div th:if="${#fields.hasErrors('showingtime')}" th:each="err : ${#fields.errors('showingtime')}"
+					th:text="${err}" style="color: red;"></div>
+				<div style="clear: both; display: block; height: 10px;"></div>
+			</div>
+			<input type="submit" value="Save" />
+
+		</form>
+	</div>
 
 </html>
