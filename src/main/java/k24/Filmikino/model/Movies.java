@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -23,6 +24,7 @@ import jakarta.validation.constraints.Size;
  */
 
 @Entity
+@Table(name = "movies")
 public class Movies {
 
 	@Id
@@ -32,26 +34,30 @@ public class Movies {
 
 	@NotEmpty(message = "Movie name cannot be empty")
 	@Size(max=100, message = "Movie name cannot exceed 100 characters")
+	@Column (name = "moviename")
 	private String movieName;
 
 	@Positive(message = "Year has to be positive number")
+	@Column (name = "releaseyear")
 	private int releaseYear;
 	
 	@NotEmpty(message = "Director needs a first name")
 	@Size(max = 30, message = "First name cannot exceed 30 characters")
+	@Column (name = "directorfname")
 	private String directorFname;
 	
 	@NotEmpty(message = "Director needs a last name")
 	@Size(max = 30, message = "Last name cannot exceed 30 characters")
+	@Column (name = "directorlname")
 	private String directorLname;
 	
-	@Column(columnDefinition = "TEXT") //Allows for more than 255 characters
+	@Column(name = "moviedescription", columnDefinition = "TEXT") //Allows for more than 255 characters
 	@Size(min = 1, max = 500, message = "Description has to be between 1 and 500 characters")
 	private String movieDescription;
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "genreId")
+	@JoinColumn(name = "genreid")
 	private Genres genre;
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy ="movie")

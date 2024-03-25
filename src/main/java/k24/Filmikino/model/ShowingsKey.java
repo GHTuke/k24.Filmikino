@@ -24,47 +24,48 @@ public class ShowingsKey implements Serializable {
 	public ShowingsKey() {
 		super();
 	}
-/*If you use this, switch the commented constructor in Showings
- * 
+//If you use this, switch the commented constructor in Showings
+ 
 	public ShowingsKey(Long movieId, Long screenId, LocalDateTime showingtime) {
 		super();
 		this.movieId = movieId;
 		this.screenId = screenId;
 		this.showingtime = showingtime;
 	}
-	*/
+	/*
 	public ShowingsKey(Movies movieId, Screens screenId, LocalDateTime showingtime) {
 		super();
 		this.movieId = movieId.getId();
 		this.screenId = screenId.getId();
 		this.showingtime = showingtime;
 	}
-
+*/
 	public Long getMovieId() {
 		return movieId;
 	}
-	
-	public void setMovieId(Movies movieId) {
-		this.movieId = movieId.getId();
-	}
+	//Switch to this if you switch constructors
+	//public void setMovieId(Movies movieId) {
+		//this.movieId = movieId.getId();
+	//}
 	
 	//Switch to this if you switch constructors
-	//public void setMovieId(Long movieId) {
-	//	this.movieId = movieId;
-	//}
+	public void setMovieId(Long movieId) {
+		this.movieId = movieId;
+	}
 
 	public Long getScreenId() {
 		return screenId;
 	}
 	
-	public void setScreenId(Screens screenId) {
-		this.screenId = screenId.getId();
-	}
+	//Switch to this if you switch constructors
+	//public void setScreenId(Screens screenId) {
+	//	this.screenId = screenId.getId();
+	//}
 	
 	//Switch to this if you switch constructors
-	//public void setScreenId(Long screenId) {
-	//	this.screenId = screenId;
-	//}
+	public void setScreenId(Long screenId) {
+		this.screenId = screenId;
+	}
 
 	public LocalDateTime getShowingtime() {
 		return showingtime;
@@ -90,6 +91,11 @@ public class ShowingsKey implements Serializable {
 		ShowingsKey other = (ShowingsKey) obj;
 		return Objects.equals(movieId, other.movieId) && Objects.equals(screenId, other.screenId)
 				&& Objects.equals(showingtime, other.showingtime);
+	}
+
+	@Override
+	public String toString() {
+		return "ShowingsKey [movieId=" + movieId + ", screenId=" + screenId + ", showingtime=" + showingtime + "]";
 	}
 	
 	

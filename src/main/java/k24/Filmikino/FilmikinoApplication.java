@@ -41,7 +41,7 @@ public class FilmikinoApplication {
 			, ShowingsRepository showingsrepository
 			, AppUserRepository appuserrepository) {
 		return (args) -> {
-			
+			/* COMMENTING AWAY TEST DATA FOR LOCAL DATABASE
 			//Adding some screens and saving them in repository for testing
 			log.info("Adding screens");
 			Screens screen1 = new Screens("Lounge", 30);
@@ -113,7 +113,7 @@ public class FilmikinoApplication {
 			
 			appuserrepository.save(user);
 			appuserrepository.save(admin);
-			
+			*/
 		};
 	}
 

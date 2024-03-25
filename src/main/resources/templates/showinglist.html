@@ -31,6 +31,7 @@
 				th:text="${showings.showingtime.dayOfMonth}+ '.' + ${showings.showingtime.monthValue} + '.' + ${showings.showingtime.year}">
 			</td>
 			<td th:text="${showings.getHour} + ':' + ${showings.getMinute}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><p><a th:href="@{/deleteshowing/{movieId}/{screenId}/{showingtime}(movieId=${showings.id.movieId}, screenId=${showings.id.screenId}, showingtime=${showings.id.showingtime})}">Delete a showing</a></p></td>
 		</tr>
 	</table>
 

@@ -5,27 +5,32 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 /*
  * Basic class to store Genre related data
  */
 
 @Entity
+@Table(name = "genres")
 public class Genres {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "genreid")
 	private Long id;
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
 	private List<Movies> movie;
 
+	@Column(name = "genre")
 	private String genre;
 
 	public Genres() {

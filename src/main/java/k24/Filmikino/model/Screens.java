@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -19,6 +20,7 @@ import jakarta.validation.constraints.Size;
  */
 
 @Entity
+@Table(name = "screens")
 public class Screens {
 
 	@Id
@@ -28,9 +30,11 @@ public class Screens {
 
 	@NotEmpty(message = "Screen needs a name")
 	@Size(min = 1, max = 50)
+	@Column(name = "screenname")
 	private String screenName;
 	
 	@Positive
+	@Column(name = "capacity")
 	private int capacity;
 	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy ="screen")

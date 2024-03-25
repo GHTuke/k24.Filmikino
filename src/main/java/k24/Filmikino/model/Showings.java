@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Future;
 
 /*
@@ -16,6 +17,7 @@ import jakarta.validation.constraints.Future;
  * ShowingsKey works as embedded primary key.
  */
 @Entity
+@Table(name = "showings")
 public class Showings {
 	
 	@EmbeddedId
@@ -32,14 +34,14 @@ public class Showings {
 	private Screens screen;
 	
 	@Future(message = "New showing has to be in the future")
-	@Column(insertable=false, updatable=false)
+	@Column(name = "showingtime", insertable=false, updatable=false)
 	private LocalDateTime showingtime;
 
 	public Showings() {
 		super();
 	}
-/*If you use this, switch the commented setters and constructor from ShowingsKey
- * 
+//If you use this, switch the commented setters and constructor from ShowingsKey
+ 
 	public Showings(Movies movie, Screens screen, LocalDateTime showingtime) {
 		super();
 		this.movie = movie;
@@ -47,7 +49,7 @@ public class Showings {
 		this.showingtime = showingtime;
 		this.id = new ShowingsKey(movie.getId(), screen.getId(), showingtime);
 	}
-	*/
+	/*
 	public Showings(Movies movie, Screens screen, LocalDateTime showingtime) {
 		super();
 		this.movie = movie;
@@ -55,7 +57,7 @@ public class Showings {
 		this.showingtime = showingtime;
 		this.id = new ShowingsKey(movie, screen, showingtime);
 	}
-
+*/
 	public ShowingsKey getId() {
 		return id;
 	}

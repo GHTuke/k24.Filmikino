@@ -1,0 +1,74 @@
+DROP TABLE IF EXISTS AppUser;
+DROP TABLE IF EXISTS Showings;
+DROP TABLE IF EXISTS Movies;
+DROP TABLE IF EXISTS Genres;
+DROP TABLE IF EXISTS Screens;
+
+CREATE TABLE Appuser
+(id BIGSERIAL PRIMARY KEY
+, username	varchar(100)	NOT NULL	UNIQUE
+, passwordHash varchar(250)	NOT NULL
+, role	varchar(20)		NOT NULL
+);
+
+INSERT INTO Appuser (username, passwordHash, role)
+VALUES 	('user', '$2a$10$0I3D.dWMqG/08uwoXjKsx.yNG447U3tk/szToL8FtWSxKVfTqJGBm', 'USER'),
+		('admin', '$2a$10$WmiW5apNDwm9k03E/mRkxeJ1scRyqNHhEIbhnOtV88Du5NDfw3tqO', 'ADMIN')
+		;
+
+CREATE TABLE Genres
+(genreid BIGSERIAL PRIMARY KEY
+, genre	varchar(100)	NOT NULL
+);
+
+INSERT INTO Genres (genre)
+VALUES	('Romance')
+		,('Drama')
+		,('Action')
+		,('Comedy')
+		;
+
+CREATE TABLE Movies
+(movieid BIGSERIAL PRIMARY KEY
+, moviename	varchar(100)	NOT NULL
+, releaseyear	BIGINT		NOT NULL
+, directorfname	varchar(30)	NOT NULL
+, directorlname	varchar(30)	NOT NUll
+, moviedescription	varchar(500) NOT NULL
+, genreid	BIGINT
+, FOREIGN KEY (genreid) REFERENCES Genres(genreid)
+);
+
+INSERT INTO Movies (moviename, releaseyear, directorfname, directorlname, moviedescription, genreid)
+VALUES	('The Great Gretzky', 2013, 'Steve', 'Holt', 'Placeholder text', 1),
+		('Jaws of the Jungle', 2023, 'Christopher', 'Turkleton', 'Placeholder', 3),
+		('Jurassic Bark', 3001, 'Phillip', 'Fry', 'Placeholder text', 2),
+		('Gone with the kiln', 1939, 'George', 'Constanza', 'Placeholder', 4)
+		;
+		
+CREATE TABLE Screens
+(screenid BIGSERIAL PRIMARY KEY
+, screenname	varchar(50)	NOT NULL
+, capacity	BIGINT	NOT NULL
+);
+
+INSERT INTO Screens (screenname, capacity)
+VALUES	('Lounge', 30)
+		,('VIP', 50)
+		,('Cattle', 300)
+		;
+		
+CREATE TABLE Showings
+(movieId	BIGINT
+, screenId	BIGINT
+, showingtime	TIMESTAMP
+, PRIMARY KEY (movieId, screenId, showingtime)
+, FOREIGN KEY (movieId) REFERENCES Movies(movieid)
+, FOREIGN KEY (screenId) REFERENCES Screens(screenid)
+);
+
+INSERT INTO Showings (movieId, screenId, showingtime)
+VALUES	(1, 1, '2024-04-21 14:00')
+		,(2, 2, '2024-05-02 18:15')
+		,(3, 3, '2024-06-03 10:10')
+		;
