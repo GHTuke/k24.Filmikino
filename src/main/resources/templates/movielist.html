@@ -54,13 +54,13 @@
 					<div style="clear: both; display: block; height: 10px;"></div>
 				</div>
 				<div>
-					<label>Director's' first name</lable>
+					<label>Director's first name</lable>
 					<input type="text" th:field="*{directorFname}" />
 					<div th:if="${#fields.hasErrors('directorFname')}" th:each="err : ${#fields.errors('directorFname')}" th:text="${err}" style="color: red;"></div>
 					<div style="clear: both; display: block; height: 10px;"></div>
 				</div>
 				<div>
-					<label>Director's' last name</lable>
+					<label>Director's last name</lable>
 					<input type="text" th:field="*{directorLname}" />
 					<div th:if="${#fields.hasErrors('directorLname')}" th:each="err : ${#fields.errors('directorLname')}" th:text="${err}" style="color: red;"></div>
 					<div style="clear: both; display: block; height: 10px;"></div>
