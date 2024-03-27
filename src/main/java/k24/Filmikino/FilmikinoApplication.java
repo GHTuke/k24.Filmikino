@@ -46,7 +46,7 @@ public class FilmikinoApplication {
 			log.info("Adding screens");
 			Screens screen1 = new Screens("Lounge", 30);
 			Screens screen2 = new Screens("VIP", 50);
-			Screens screen3 = new Screens("Cattle", 300);
+			Screens screen3 = new Screens("Basic", 300);
 			
 			log.info("saving screens to repository");
 			screensrepository.save(screen1);

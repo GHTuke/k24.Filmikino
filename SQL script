@@ -55,7 +55,7 @@ CREATE TABLE Screens
 INSERT INTO Screens (screenname, capacity)
 VALUES	('Lounge', 30)
 		,('VIP', 50)
-		,('Cattle', 300)
+		,('Basic', 300)
 		;
 		
 CREATE TABLE Showings
